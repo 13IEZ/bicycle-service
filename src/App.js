@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {Container} from '@material-ui/core';
+import {Redirect, Route, Switch} from 'react-router-dom';
+import {useSelector} from 'react-redux';
+import AppToolbar from './components/UI/Toolbar/AppToolbar';
+import Login from './container/Login/Login';
+import Register from './container/Register/Register';
+
+
+const ProtectedRoute = ({isAllowed, redirectTo, ...props}) => {
+  return isAllowed ?
+      <Route {...props} /> :
+      <Redirect to={redirectTo}/>;
+};
 
 function App() {
+  const user = useSelector(state => state.users.user);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <>
+        <AppToolbar />
+        <main>
+          <Container maxWidth='xl'>
+            <Switch>
+              <ProtectedRoute isAllowed={!user}
+                              redirectTo="/"
+                              path='/login'
+                              exact
+                              component={Login}
+              />
+              <ProtectedRoute isAllowed={!user}
+                              redirectTo="/"
+                              path='/register'
+                              exact
+                              component={Register}
+              />
+            </Switch>
+          </Container>
+        </main>
+      </>
   );
 }
 
