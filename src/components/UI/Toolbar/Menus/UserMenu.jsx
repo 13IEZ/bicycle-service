@@ -1,24 +1,24 @@
 import React from 'react';
-import {Button, Typography} from '@material-ui/core';
-import {Link} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import {logoutUser} from '../../../../store/actions/usersActions';
+import { Button, Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const UserMenu = () => {
-	const dispatch = useDispatch();
-	const user = useSelector(state => state.users.user);
+  const user = useSelector((state) => state.users.user);
 
-	const logoutHandler = () => {
-		dispatch(logoutUser());
-	};
-
-	return (
-		<>
-			<Typography>Hello {user.displayName}! You can</Typography>
-			<Button component={Link} to="/new-product" color="secondary">Add new item</Button>
-			<Button color="secondary" onClick={logoutHandler}>Log out</Button>
-		</>
-	);
+  return (
+    <>
+      <Typography>
+        Hello {`${user.firstName} ${user.lastName}`}! You can
+      </Typography>
+      <Button component={Link} to='/new-product' color='secondary'>
+        See All incident
+      </Button>
+      <Button component={Link} to='/new-product' color='secondary'>
+        Check Staff
+      </Button>
+    </>
+  );
 };
 
 export default UserMenu;
