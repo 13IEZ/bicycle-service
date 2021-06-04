@@ -40,7 +40,6 @@ export const createUser = (userData) => {
       dispatch(createUserSuccess());
       dispatch(push('/'));
     } catch (error) {
-      // console.dir(error.response.data);
       if (error.response && error.response.data) {
         dispatch(createUserFailure(error.response.data));
       } else {

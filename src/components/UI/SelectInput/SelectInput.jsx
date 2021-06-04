@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
-import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -17,20 +16,25 @@ const useStyles = makeStyles((theme) => ({
 
 const SelectInput = (props) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  const [type, setType] = React.useState('');
+
+  const handleChange = (event) => {
+    setType(event.target.value);
+    props.onChange(event.target.value);
+  };
 
   return (
     <FormControl required className={classes.formControl}>
-      <NativeSelect name='type' className={classes.selectEmpty}>
+      <NativeSelect
+        value={type}
+        required
+        name='type'
+        className={classes.selectEmpty}
+        onChange={handleChange}>
         <option value='sport'>Sport</option>
         <option value='general'>General</option>
-        {/*{categories.map(elem => {*/}
-        {/*	if (elem.title !== 'All Categories') return <option key={elem._id}*/}
-        {/*														value={elem._id}>{elem.title}</option>;*/}
-        {/*	else return null;*/}
-        {/*})}*/}
       </NativeSelect>
-      <FormHelperText>Select category</FormHelperText>
+      <FormHelperText>Select type</FormHelperText>
     </FormControl>
   );
 };

@@ -3,11 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Grid, Typography, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import SimpleModal from '../../components/UI/Modal/Modal';
+import { fetchReports } from '../../store/actions/reportsActions';
 // import {fetchProducts} from '../../store/actions/productsActions';
 // import ProductItem from '../../components/ProductItem/ProductItem';
 
 const Incident = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchReports());
+  }, []);
 
   return (
     <Grid container direction='column' spacing={2}>

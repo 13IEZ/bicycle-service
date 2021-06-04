@@ -1,8 +1,5 @@
-
 const IncidentItem = () => {
-	return(
-		<div>asd</div>
-	)
-}
+  return <div>asd</div>;
+};
 
 export default IncidentItem;

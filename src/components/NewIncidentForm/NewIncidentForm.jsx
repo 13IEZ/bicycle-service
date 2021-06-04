@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import { Button, Grid, TextField } from '@material-ui/core';
-import FileInput from '../UI/FileInput/FileInput';
 import SelectInput from '../UI/SelectInput/SelectInput';
 import { useDispatch, useSelector } from 'react-redux';
+import { createReport } from '../../store/actions/reportsActions';
 // import {createProduct} from '../../store/actions/productsAction';
 
 const NewIncidentForm = (props) => {
   const dispatch = useDispatch();
   // const productsError = useSelector(state => state.products.productsError);
+  const date = new Date().toISOString().split('T')[0];
   const [state, setState] = useState({
-    status: '',
+    status: 'new',
     date: '',
     licenseNumber: '',
     color: '',
-    type: '',
+    type: 'sport',
     ownerFullName: '',
-    officer: '',
-    createdAt: '',
-    updateAt: '',
-    clientId: '',
+    createdAt: date,
+    updateAt: date,
+    clientId: '04b3683d-962d-4ea8-b431-94a40828799e',
     description: '',
     resolution: '',
   });
@@ -43,8 +43,7 @@ const NewIncidentForm = (props) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-
-    // dispatch(createProduct({...state}));
+    dispatch(createReport({ ...state }));
   };
 
   return (
@@ -75,6 +74,17 @@ const NewIncidentForm = (props) => {
         <Grid item>
           <TextField
             fullWidth
+            variant='outlined'
+            label='Owner Full Name'
+            name='ownerFullName'
+            onChange={inputChangeHandler}
+            value={state.ownerFullName}
+            required
+          />
+        </Grid>
+        <Grid item>
+          <TextField
+            fullWidth
             multiline
             rows={3}
             variant='outlined'
@@ -85,17 +95,25 @@ const NewIncidentForm = (props) => {
             required
           />
         </Grid>
-
-        <Grid item>
-          <SelectInput
-            name='type'
-            value={state.type}
-            onChange={selectChangeHandler}
+        <Grid item container alignItems='center'>
+          <SelectInput name='type' onChange={selectChangeHandler} />
+          <TextField
+            id='date'
+            label='Date'
+            name='date'
+            style={{ width: '20rem', marginLeft: '4rem' }}
+            type='date'
+            required
+            onChange={inputChangeHandler}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
+
         <Grid item>
           <Button type='submit' color='primary'>
-            Create
+            send report
           </Button>
         </Grid>
       </Grid>
@@ -104,11 +122,3 @@ const NewIncidentForm = (props) => {
 };
 
 export default NewIncidentForm;
-
-// const NewIncidentForm = () => {
-// 	return (
-// 		<div>allo</div>
-// 	)
-// }
-//
-// export default NewIncidentForm;
