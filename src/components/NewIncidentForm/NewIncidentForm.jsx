@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Grid, TextField } from '@material-ui/core';
-import SelectInput from '../UI/SelectInput/SelectInput';
-import { useDispatch, useSelector } from 'react-redux';
+import SelectInputType from '../UI/SelectInput/SelectInputType';
+import { useDispatch } from 'react-redux';
 import { createReport } from '../../store/actions/reportsActions';
-// import {createProduct} from '../../store/actions/productsAction';
 
 const NewIncidentForm = (props) => {
   const dispatch = useDispatch();
-  // const productsError = useSelector(state => state.products.productsError);
   const date = new Date().toISOString().split('T')[0];
   const [state, setState] = useState({
     status: 'new',
@@ -22,8 +20,6 @@ const NewIncidentForm = (props) => {
     description: '',
     resolution: '',
   });
-
-  console.log(state);
 
   const inputChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -96,7 +92,7 @@ const NewIncidentForm = (props) => {
           />
         </Grid>
         <Grid item container alignItems='center'>
-          <SelectInput name='type' onChange={selectChangeHandler} />
+          <SelectInputType name='type' onChange={selectChangeHandler} />
           <TextField
             id='date'
             label='Date'

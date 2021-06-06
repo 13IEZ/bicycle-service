@@ -1,22 +1,24 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Grid, Typography, Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import SimpleModal from '../../components/UI/Modal/Modal';
-import { fetchReports } from '../../store/actions/reportsActions';
-// import {fetchProducts} from '../../store/actions/productsActions';
-// import ProductItem from '../../components/ProductItem/ProductItem';
+import { Grid, Typography } from '@material-ui/core';
+import { deleteReport, fetchReports } from '../../store/actions/reportsActions';
+import IncidentItem from '../../components/IncidentItem/IncidentItem';
 
 const Incident = () => {
   const dispatch = useDispatch();
+  const reports = useSelector((state) => state.reports.reports);
+  const deleteMessage = useSelector((state) => state.reports.deleteMessage);
 
   useEffect(() => {
     dispatch(fetchReports());
-  }, []);
+  }, [dispatch, deleteMessage]);
+
+  const deleteHandler = (id) => {
+    dispatch(deleteReport(id));
+  };
 
   return (
     <Grid container direction='column' spacing={2}>
-      {/*<SimpleModal/>*/}
       <Grid
         item
         container
@@ -28,16 +30,15 @@ const Incident = () => {
         </Grid>
       </Grid>
       <Grid item container direction='row' spacing={2}>
-        {/*{products.map(product => {*/}
-        {/*	return <ProductItem*/}
-        {/*		id={product._id}*/}
-        {/*		title={product.title}*/}
-        {/*		category={product.category}*/}
-        {/*		price={product.price.$numberDecimal}*/}
-        {/*		image={product.image}*/}
-        {/*		key={product._id}*/}
-        {/*	/>*/}
-        {/*})}*/}
+        {reports.map((report) => {
+          return (
+            <IncidentItem
+              report={report}
+              key={report._id}
+              deleteHandler={deleteHandler}
+            />
+          );
+        })}
       </Grid>
     </Grid>
   );

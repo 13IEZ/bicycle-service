@@ -11,10 +11,10 @@ const UserMenu = () => {
       <Typography>
         Hello {`${user.firstName} ${user.lastName}`}! You can
       </Typography>
-      <Button component={Link} to='/new-product' color='secondary'>
+      <Button component={Link} to='/all-incidents' color='secondary'>
         See All incident
       </Button>
-      <Button component={Link} to='/new-product' color='secondary'>
+      <Button component={Link} to='/staff' color='secondary'>
         Check Staff
       </Button>
     </>

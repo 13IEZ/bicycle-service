@@ -1,6 +1,7 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import usersReducer from './reducers/usersReducer';
 import reportsReducer from './reducers/reportsReducer';
+import staffReducer from './reducers/staffReducer';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import thunkMiddleware from 'redux-thunk';
 import { createBrowserHistory } from 'history';
@@ -13,6 +14,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
   users: usersReducer,
   reports: reportsReducer,
+  staff: staffReducer,
   router: connectRouter(history),
 });
 

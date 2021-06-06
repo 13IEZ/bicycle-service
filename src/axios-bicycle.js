@@ -8,11 +8,10 @@ const ax = axios.create({
 
 ax.interceptors.request.use((req) => {
   const users = store.getState().users;
-  // if (users.user)
-  //   req.headers = {
-  //     Authorization: 'Bearer '.concat(users.user.token.toString()),
-  //   };
-  if (users.user) req.headers['Authorization'] = `Bearer${users.user.token}`;
+  if (users.user)
+    req.headers = {
+      Authorization: `Bearer ${users.user.token}`,
+    };
   return req;
 });
 

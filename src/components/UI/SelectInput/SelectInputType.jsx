@@ -14,19 +14,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SelectInput = (props) => {
+const SelectInputType = (props) => {
   const classes = useStyles();
   const [type, setType] = React.useState('');
 
   const handleChange = (event) => {
     setType(event.target.value);
-    props.onChange(event.target.value);
+    props.onChange(event);
   };
 
   return (
     <FormControl required className={classes.formControl}>
       <NativeSelect
-        value={type}
+        value={props.val}
         required
         name='type'
         className={classes.selectEmpty}
@@ -39,4 +39,4 @@ const SelectInput = (props) => {
   );
 };
 
-export default SelectInput;
+export default SelectInputType;
